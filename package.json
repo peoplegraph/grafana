@@ -27,6 +27,7 @@
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-contrib-uglify": "~0.2.4",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-deploy": "^0.1.7",
     "grunt-filerev": "^0.2.1",
     "grunt-git-describe": "~2.3.2",
     "grunt-karma": "~0.8.3",
@@ -49,6 +50,7 @@
     "karma-script-launcher": "~0.1.0",
     "load-grunt-tasks": "~0.2.0",
     "mocha": "~1.16.1",
+    "moment": "^2.8.4",
     "requirejs": "~2.1.14",
     "rjs-build-analysis": "0.0.3"
   },
@@ -64,6 +66,7 @@
   "dependencies": {
     "grunt-jscs-checker": "^0.4.4",
     "karma-sinon": "^1.0.3",
-    "sinon": "^1.10.3"
+    "sinon": "^1.10.3",
+    "ssh2": "^0.3.6"
   }
 }

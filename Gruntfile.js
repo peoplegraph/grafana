@@ -32,6 +32,24 @@ module.exports = function (grunt) {
   // Merge that object with what with whatever we have here
   loadConfig(config,'./tasks/options/');
 
+  config.deploy = {
+    liveservers: {
+      options:{
+        source_path: 'dist/*',
+        servers: [{
+          host: 'stats.peoplegraph.io',
+          port: 22,
+          username: 'ubuntu',
+          privateKey: require('fs').readFileSync((process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE)
+                      + '/.ssh/peoplegraph.pem')
+        }],
+          cmds_before_deploy: [],
+          cmds_after_deploy: ["ln -s /work/grfn/config.js /work/grfn/current/config.js"],
+          deploy_path: "/work/grfn"
+      }
+    }
+  };
+
   // pass the config to grunt
   grunt.initConfig(config);
 

@@ -361,10 +361,39 @@ function($, _, moment) {
   };
 
   kbn.valueFormats.bits = kbn.formatFuncCreator(1024, [' b', ' Kib', ' Mib', ' Gib', ' Tib', ' Pib', ' Eib', ' Zib', ' Yib']);
-  kbn.valueFormats.bytes = kbn.formatFuncCreator(1024, [' B', ' KiB', ' MiB', ' GiB', ' TiB', ' PiB', ' EiB', ' ZiB', ' YiB']);
+  kbn.valueFormats.bytes = kbn.formatFuncCreator(1024, [' b', ' Kb', ' Mb', ' Gb', ' Tb', ' Pb', ' Eb', ' Zb', ' Yb']);
   kbn.valueFormats.bps = kbn.formatFuncCreator(1000, [' bps', ' Kbps', ' Mbps', ' Gbps', ' Tbps', ' Pbps', ' Ebps', ' Zbps', ' Ybps']);
   kbn.valueFormats.short = kbn.formatFuncCreator(1000, ['', ' K', ' Mil', ' Bil', ' Tri', ' Qaudr', ' Quint', ' Sext', ' Sept']);
   kbn.valueFormats.none = kbn.toFixed;
+
+  kbn.valueFormats.smart = function(value) {
+    if (value === null) { return ""; }
+
+    if (Math.abs(value) < 1000) {
+      return value.toFixed(0) + "";
+    }
+    else if (Math.abs(value) < 10 * 1000) {
+      return (value / 1000).toFixed(2) + " k";
+    }
+    else if (Math.abs(value) < 100 * 1000) {
+      return (value / 1000).toFixed(1) + " k";
+    }
+    else if (Math.abs(value) < 1000 * 1000) {
+      return (value / 1000).toFixed(0) + " k";
+    }
+    else if (Math.abs(value) < 10 * 1000 * 1000) {
+      return (value / 1000 / 1000).toFixed(2) + " m";
+    }
+    else if (Math.abs(value) < 100 * 1000 * 1000) {
+      return (value / 1000 / 1000).toFixed(1) + " m";
+    }
+    else if (Math.abs(value) < 1000 * 1000 * 1000) {
+      return (value / 1000 / 1000).toFixed(0) + " m";
+    }
+    else {
+      return (value / 1000 / 1000 / 1000).toFixed(3) + " bn";
+    }
+  };
 
   kbn.valueFormats.ms = function(size, decimals, scaledDecimals) {
     if (size === null) { return ""; }
